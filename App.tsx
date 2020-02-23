@@ -1,27 +1,19 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, View, StatusBar,} from 'react-native';
-
-import { Colors,} from 'react-native/Libraries/NewAppScreen';
+import { HomePage } from './app/views/home';
+import { ProfilePage } from './app/views/profile';
+import { View, ScrollView } from 'react-native';
+import { BottomNavBar } from './app/sections/bottom_nav_bar';
 const App = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <View style={{flex: 1, flexDirection: 'column', alignSelf: "stretch"}}>
+      <ScrollView>
+        <ProfilePage username='myName' />
+        <HomePage />
+      </ScrollView>
+        <BottomNavBar />
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-});
-
 export default App;
+
+const myName = "lijo";
