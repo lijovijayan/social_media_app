@@ -23,7 +23,6 @@ export class MainPage extends React.Component< Props ,State> {
                     <ProfilePage username='myName' />
                     <HomePage />
                 </ScrollView>
-                {/* fix error */}
                 <BottomNavBar activeTab={this.state.activeIndex} switchTabs={this.switchTabs} />
             </View>
         );
