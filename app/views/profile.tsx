@@ -25,7 +25,7 @@ export class ProfilePage extends React.Component<Props, State> {
         });
     }
     render() {
-        console.log('on render function')
+        console.log('on render function - profile component')
         return (
             <View>
                 <Text>Here is Profile component</Text>

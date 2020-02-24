@@ -5,7 +5,36 @@ interface Tab {
     child: any;
     style: {};
 };
-export class BottomNavBar extends React.Component {
+interface Props {
+    switchTabs: (parameter: number) => void;
+}
+export class BottomNavBar extends React.Component<Props> {
+    // BottomNavBar methods
+    callback: any;
+
+    // BottomNavBar properties
+    //
+
+    constructor(props: any) {
+        super(props);
+        this.callback = this.props.switchTabs;
+    }
+    render() {
+        console.log('re rendered - bottomNavBar');
+        return (
+            <View style={style.bottomNavBar}>
+                {this.tabs.map((tab, i: number) =>
+                    <TouchableNativeFeedback key={i} onPress={(event) => this.callback(i)}>
+                        <View style={style.tab} key={i}>
+                            {tab.child}
+                        </View>
+                    </TouchableNativeFeedback>
+                )
+                }
+            </View >);
+    }
+
+
     tabs: Tab[] = [
         {
             style: {
@@ -50,19 +79,6 @@ export class BottomNavBar extends React.Component {
                 />,
         },
     ];
-    render() {
-        return (
-            <View style={style.bottomNavBar}>
-                {this.tabs.map((tab, i) =>
-                    <TouchableNativeFeedback key={i}>
-                        <View style={style.tab} key={i}>
-                            {tab.child}
-                        </View>
-                    </TouchableNativeFeedback>
-                )
-                }
-            </View >);
-    }
 }
 
 const style = StyleSheet.create(
