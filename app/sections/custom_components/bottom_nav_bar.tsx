@@ -7,8 +7,12 @@ interface Tab {
 };
 interface Props {
     switchTabs: (parameter: number) => void;
+    activeTab: number;
 }
-export class BottomNavBar extends React.Component<Props> {
+interface State {
+    activeTab: number;
+}
+export class BottomNavBar extends React.Component<Props, State> {
     // BottomNavBar methods
     callback: any;
 
@@ -17,7 +21,13 @@ export class BottomNavBar extends React.Component<Props> {
 
     constructor(props: any) {
         super(props);
+        this.state = {
+            activeTab: this.props.activeTab,
+        }
         this.callback = this.props.switchTabs;
+    }
+    static getDerivedStateFromProps = (props: any, state: Props) => {
+        return { activeTab: props.activeTab };
     }
     render() {
         console.log('re rendered - bottomNavBar');
@@ -25,7 +35,7 @@ export class BottomNavBar extends React.Component<Props> {
             <View style={style.bottomNavBar}>
                 {this.tabs.map((tab, i: number) =>
                     <TouchableNativeFeedback key={i} onPress={(event) => this.callback(i)}>
-                        <View style={style.tab} key={i}>
+                        <View style={[this.state.activeTab === i ? style.activeTab : style.tab]} key={i}>
                             {tab.child}
                         </View>
                     </TouchableNativeFeedback>
@@ -94,6 +104,16 @@ const style = StyleSheet.create(
             borderTopColor: "#cccccc",
             borderTopWidth: 1,
             height: 55,
+            alignSelf: "stretch",
+            flex: 1,
+            backgroundColor: "white",
+            alignItems: "center",
+            justifyContent: "center",
+        },
+        activeTab: {
+            borderTopColor: "#cccccc",
+            borderTopWidth: 6,
+            height: 56,
             alignSelf: "stretch",
             flex: 1,
             backgroundColor: "white",

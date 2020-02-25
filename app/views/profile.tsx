@@ -29,7 +29,7 @@ export class ProfilePage extends React.Component<Props, State> {
         return (
             <View>
                 <Text>Here is Profile component</Text>
-                <Text onPress={this.toggleText}> YO YO {this.state.username}</Text>
+                <Text onPress={this.toggleText}>{this.state.username}</Text>
             </View>
         );
     }

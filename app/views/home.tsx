@@ -7,7 +7,6 @@ export class HomePage extends React.Component {
         return(
             <View style= { {height: 3000}}>
                 <Text>Here is home component</Text>
-                <Text>YO YO</Text>
             </View>
         );
     }

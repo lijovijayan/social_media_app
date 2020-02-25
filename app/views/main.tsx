@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import { ProfilePage } from './profile';
-import { BottomNavBar } from '../sections/bottom_nav_bar';
+import { BottomNavBar } from '../sections/custom_components/bottom_nav_bar';
 import { HomePage } from './home';
 interface State {
     activeIndex: number;
 }
 interface Props {
 }
-export class MainPage extends React.Component< Props ,State> {
+export class MainPage extends React.Component<Props, State> {
     constructor(props: Readonly<{}>) {
         super(props);
         this.state = {
@@ -20,14 +20,25 @@ export class MainPage extends React.Component< Props ,State> {
         return (
             <View style={{ flex: 1, flexDirection: 'column', alignSelf: "stretch" }}>
                 <ScrollView>
-                    <ProfilePage username='myName' />
-                    <HomePage />
+                    {this.renderChild(this.state.activeIndex)}
                 </ScrollView>
                 <BottomNavBar activeTab={this.state.activeIndex} switchTabs={this.switchTabs} />
             </View>
         );
     }
-    switchTabs(index: number) {
-        this.setState({activeIndex: index});
+    switchTabs = (index: number) => {
+        this.setState((state: State) => {
+            return { activeIndex: index }
+        });
+    }
+    renderChild(index: number) {
+        switch (index) {
+            case 0:
+                return <HomePage />
+            case 1:
+                return <ProfilePage username={'lijo'} />
+            default:
+                break;
+        }
     }
 }
