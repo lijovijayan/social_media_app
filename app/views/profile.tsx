@@ -5,6 +5,7 @@ interface State {
     username: any;
 }
 interface Props {
+    navigation: any;
     username: any;
 }
 export class ProfilePage extends React.Component<Props, State> {
