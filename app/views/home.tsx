@@ -2,13 +2,27 @@ import { ScrollView } from 'react-native-gesture-handler';
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { CardFooter } from '../sections/card_footer';
+import { CardHeader } from '../sections/card_header';
 
 interface Props {
     navigation: any;
+    name: string;
 }
-export class HomePage extends React.Component<Props> {
+interface State {
+    navigation?: any;
+    name?: string;
+}
+export class HomePage extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            name: this.props.name,
+            navigation: this.props.navigation,
+        };
+    }
+    changeData() {
+        this.state = { navigation: ' ', name: '' }
     }
     render() {
         console.log('re rendered - HomePage');
@@ -29,43 +43,40 @@ export class HomePage extends React.Component<Props> {
                         </View>
                         {this.renderImages()}
                     </ScrollView>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
+                    {this.renderCards()}
                 </View>
             </ScrollView>
         );
     }
+    renderCards() {
+        let cards = [];
+        for (let i: any = 0; i < 10; i++) {
+            cards.push(
+                <View key={'card-parent' + i} style={styles.card}>
+                    <CardHeader key={'card-header' + i}></CardHeader>
+                    <Image
+                        key={i}
+                        style={styles.cardIcon}
+                        source={{ uri: `https://picsum.photos/${Math.floor(Math.random() * Math.floor(300) + 1000)}/500` }}
+                    />
+                    <CardFooter key={'card-footer' + i}></CardFooter>
+                </View>);
+        }
+        return cards;
+    }
     renderImages() {
         let images = [];
         for (let i = 0; i < 20; i++) {
-            images.push(<View
-                key={i}
-                style={styles.statusIconContainer}>
-                <Image
+            images.push(
+                <View
                     key={i}
-                    style={styles.statusIcon}
-                    source={{ uri: `https://picsum.photos/${Math.floor(Math.random() * Math.floor(300) + 1000)}/50` }}
-                />
-            </View>);
+                    style={styles.statusIconContainer}>
+                    <Image
+                        key={i}
+                        style={styles.statusIcon}
+                        source={{ uri: `https://picsum.photos/${Math.floor(Math.random() * Math.floor(300) + 1000)}/50` }}
+                    />
+                </View>);
         }
         return images;
     }
@@ -75,7 +86,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         alignItems: "center",
-        alignSelf: "stretch"
+        alignSelf: "stretch",
     },
     column: {
         flex: 1,
@@ -86,11 +97,9 @@ const styles = StyleSheet.create({
     },
     card: {
         marginTop: 15,
-        textAlign: "center",
-        justifyContent: "center",
         borderRadius: 10,
         width: "94%",
-        height: 380,
+        height: 420,
         shadowOffset: {
             width: 0,
             height: 1,
@@ -100,6 +109,7 @@ const styles = StyleSheet.create({
         shadowColor: "black",
         elevation: 5,
         backgroundColor: "white",
+        overflow: "hidden",
     },
     statusBar: {
         width: "94%",
@@ -142,5 +152,9 @@ const styles = StyleSheet.create({
         borderRadius: 35,
         alignItems: "center",
         justifyContent: "center",
+    },
+    cardIcon: {
+        width: "100%",
+        height: "100%",
     }
 });

@@ -21,6 +21,7 @@ export class ProfilePage extends React.Component<Props, State> {
         }
     }
     toggleText = () => {
+        console.log('clicked');
         this.setState((state: State) => {
             return { username: state.username === '' ? 'lijo' : '' }
         });
