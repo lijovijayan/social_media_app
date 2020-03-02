@@ -1,38 +1,33 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Notifcation } from '../sections/notification_cont';
+import { notifications } from '../assets/notifications';
 
 interface State {
-    username: any;
 }
 interface Props {
-    navigation: any;
-    username: any;
 }
 export class NotificationPage extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
         this.state = {
-            username: '',
         }
-    }
-    componentDidMount() {
-        this.state = {
-            username: this.props.username,
-        }
-    }
-    toggleText = () => {
-        console.log('clicked');
-        this.setState((state: State) => {
-            return { username: state.username === '' ? 'lijo' : '' }
-        });
     }
     render() {
         console.log('on render function - notification component')
         return (
-            <View>
-                <Text>Here is Notification component</Text>
-                <Text onPress={this.toggleText}>{this.state.username}</Text>
-            </View>
+            <ScrollView style={{ backgroundColor: "white" }}>
+                {renderMessages()}
+            </ScrollView>
         );
     }
+}
+function renderMessages() {
+    let notificationList: JSX.Element[] = [];
+    notifications.forEach((notification, i) => {
+        notificationList.push(
+            <Notifcation key={i} username={notification.username} subject={notification.subject}></Notifcation>
+        )
+    });
+    return notificationList;
 }
