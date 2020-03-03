@@ -21,7 +21,10 @@ export class HomePage extends React.Component<Props, State> {
             name: this.props.name,
             navigation: this.props.navigation,
         };
+        this.initialID = Math.floor(Math.random() * Math.floor(300) + 1000);
     }
+    initialID: number;
+    images = 100;
     changeData() {
         this.state = { navigation: ' ', name: '' }
     }
@@ -44,21 +47,22 @@ export class HomePage extends React.Component<Props, State> {
                         </View>
                         {this.renderImages()}
                     </ScrollView>
-                    {this.renderCards()}
+                    {this.renderCards(this.initialID)}
                 </View>
             </ScrollView>
         );
     }
-    renderCards() {
+    renderCards(initialID: number) {
         let cards = [];
-        for (let i: any = 0; i < 10; i++) {
+        this.images = this.images + 2;
+        for (let i: any = 0; i < this.images; i++) {
             cards.push(
                 <View key={'card-parent' + i} style={styles.card}>
                     <CardHeader key={'card-header' + i}></CardHeader>
                     <Image
                         key={i}
                         style={[styles.cardIcon]}
-                        source={{ uri: `https://picsum.photos/${Math.floor(Math.random() * Math.floor(300) + 1000)}/500` }}
+                        source={{ uri: `https://picsum.photos/${i + initialID}/500` }}
                     />
                     <CardFooter key={'card-footer' + i}></CardFooter>
                 </View>);

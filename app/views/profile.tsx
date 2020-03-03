@@ -76,25 +76,41 @@ export class ProfilePage extends React.Component<Props, State> {
                 </View>
 
                 <View style={styles.gridContainer}>
-                    <View style={styles.gridChild}>
-                        
-                    </View>
+                    {renderGrid()}
                 </View>
             </ScrollView>
         );
     }
 }
+function renderGrid() {
+    let gridImages = [];
+    for (let i = 0; i < 68; i++) {
+        gridImages.push(
+            <View key={i} style={styles.gridChild}>
+                <Image
+                    key={i}
+                    style={[styles.gridImage]}
+                    source={{ uri: `https://picsum.photos/${i + 1000}/500` }}
+                />
+            </View>
+        );
+    }
+    return gridImages;
+}
 const styles = StyleSheet.create({
     gridContainer: {
         flexDirection: "row",
         flexWrap: "wrap",
+        padding: 5,
     },
     gridChild: {
-        width: (Dimensions.get('window').width / 3),
-        height: (Dimensions.get('window').width / 3),
-        backgroundColor: "red",
-        margin: 2,
+        width: (Dimensions.get('window').width / 3) - 3.35,
+        height: (Dimensions.get('window').width / 3) - 3.35,
         padding: 5,
+    },
+    gridImage: {
+        width: "100%",
+        height: "100%",
     },
     scrollView: {
         backgroundColor: "white",
