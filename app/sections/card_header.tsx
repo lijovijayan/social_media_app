@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import { names } from '../assets/usernames';
+import { theme } from '../conf';
 interface Props {
 }
 interface State {
@@ -38,7 +39,7 @@ const style = StyleSheet.create(
             width: 35,
             margin: 7.5,
             borderRadius: 17.5,
-            backgroundColor: "#3c8ab8",
+            backgroundColor: theme.primaryColor,
             padding: 2.5,
         },
         headerContainer: {

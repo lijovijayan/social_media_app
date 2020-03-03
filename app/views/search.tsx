@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button, ScrollView, TextInput } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { theme } from '../conf';
 interface Props {
     navigation: any;
 }
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     }, searchIconContainer: {
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#3c8ab8",
+        backgroundColor: theme.primaryColor,
         height: 40,
         width: 40,
         borderRadius: 20,
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     searchInput: {
         height: 40,
         borderBottomWidth: 0,
-        borderColor: "#3c8ab8",
+        borderColor: theme.primaryColor,
         width: "80%",
         marginLeft: 15
     }

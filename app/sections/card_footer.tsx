@@ -1,6 +1,7 @@
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { View, StyleSheet } from 'react-native';
+import { theme } from '../conf';
 interface Props {
 }
 interface State {
@@ -29,13 +30,13 @@ const style = StyleSheet.create(
             flexDirection: "row",
             bottom: 0,
             position: "absolute",
-            backgroundColor: "#3c8ab8",
+            backgroundColor: theme.primaryColor,
         },
         iconContainer: {
             flex: 1,
             alignSelf: "stretch",
             height: 50,
-            backgroundColor: "#3c8ab8",
+            backgroundColor: theme.primaryColor,
             alignItems: "center",
             justifyContent: "center",
         }

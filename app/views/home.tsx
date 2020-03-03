@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CardFooter } from '../sections/card_footer';
 import { CardHeader } from '../sections/card_header';
+import { theme } from '../conf';
 
 interface Props {
     navigation: any;
@@ -56,7 +57,7 @@ export class HomePage extends React.Component<Props, State> {
                     <CardHeader key={'card-header' + i}></CardHeader>
                     <Image
                         key={i}
-                        style={styles.cardIcon}
+                        style={[styles.cardIcon]}
                         source={{ uri: `https://picsum.photos/${Math.floor(Math.random() * Math.floor(300) + 1000)}/500` }}
                     />
                     <CardFooter key={'card-footer' + i}></CardFooter>
@@ -73,7 +74,7 @@ export class HomePage extends React.Component<Props, State> {
                     style={styles.statusIconContainer}>
                     <Image
                         key={i}
-                        style={styles.statusIcon}
+                        style={[styles.statusIcon, {backgroundColor: "red"}]}
                         source={{ uri: `https://picsum.photos/${Math.floor(Math.random() * Math.floor(300) + 1000)}/50` }}
                     />
                 </View>);
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
         shadowColor: "black",
         elevation: 4,
         borderWidth: 1,
-        borderColor: "#3c8ab8",
+        borderColor: theme.primaryColor,
         padding: 2,
         overflow: "hidden",
     },
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
         borderRadius: 35,
     },
     addIconContainer: {
-        backgroundColor: "#3c8ab8",
+        backgroundColor: theme.primaryColor,
         width: "100%",
         height: "100%",
         borderRadius: 35,
