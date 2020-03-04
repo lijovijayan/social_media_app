@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, StatusBar } from 'react-native';
 import { Notifcation } from '../sections/notification_cont';
 import { notifications } from '../assets/notifications';
 
@@ -16,7 +16,10 @@ export class NotificationPage extends React.Component<Props, State> {
     render() {
         console.log('on render function - notification component')
         return (
-            <ScrollView style={{ backgroundColor: "white" }}>
+            <ScrollView
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            style={{ backgroundColor: "white" }}>
                 {renderMessages()}
             </ScrollView>
         );

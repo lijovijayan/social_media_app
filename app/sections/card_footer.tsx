@@ -5,14 +5,28 @@ import { theme } from '../conf';
 interface Props {
 }
 interface State {
+    like: boolean,
 }
 export class CardFooter extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            like: false,
+        }
+    }
     render() {
         console.log('re rendered - card footer');
         return (
             <View style={style.row}>
                 <View style={style.iconContainer}>
-                    <MaterialCommunityIcons style={{ color: "white" }} size={25} name={'heart-outline'} />
+                    <MaterialCommunityIcons
+                        style={{ color: this.state.like ? 'red' : 'white' }} size={25}
+                        name={this.state.like ? 'cards-heart' : 'heart-outline'}
+                        onPress={() => {
+                            this.setState((state: State, prevState: State) => {
+                                return { like: !state.like }
+                            })
+                        }} />
                 </View>
                 <View style={style.iconContainer}>
                     <MaterialCommunityIcons style={{ color: "white" }} size={25} name={'comment-outline'} />

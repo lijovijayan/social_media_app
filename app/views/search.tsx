@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, Button, ScrollView, TextInput } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { theme } from '../conf';
+import { GridView } from '../sections/grid_view';
 interface Props {
     navigation: any;
 }
@@ -36,27 +37,7 @@ export class SearchPage extends React.Component<Props> {
                             />
                         </View>
                     </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
-                    <View style={styles.card} >
-                        <Text style={styles.text}>Card</Text>
-                    </View>
+                    <GridView randomImages={true} numberOfImages={200}></GridView>
                 </View>
             </ScrollView>
         );
@@ -77,26 +58,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingBottom: 15,
         backgroundColor: "#FFFFFFFF"
-    },
-    card: {
-        marginTop: 15,
-        textAlign: "center",
-        justifyContent: "center",
-        borderRadius: 10,
-        width: "94%",
-        height: 380,
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.18,
-        shadowRadius: 1.00,
-        shadowColor: "black",
-        elevation: 5,
-        backgroundColor: "white",
-    },
-    text: {
-        textAlign: "center",
     },
     searchBar: {
         width: "94%",
