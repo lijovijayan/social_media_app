@@ -9,6 +9,7 @@ import { SearchPage } from './views/search';
 import { MainPage } from './views/main';
 import { NotificationPage } from './views/notification';
 import { theme } from './conf';
+import { LoginPage } from './views/login';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -20,6 +21,10 @@ export function StackNavigation() {
         headerShown: false
       }}
     >
+      <Stack.Screen
+        name="LoginPage"
+        component={LoginPage}
+      />
       <Stack.Screen
         name="MainPage"
         component={MainPage}

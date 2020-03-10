@@ -1,10 +1,9 @@
 import { ScrollView } from 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { CardFooter } from '../sections/card_footer';
-import { CardHeader } from '../sections/card_header';
 import { theme } from '../conf';
+import { CardView } from '../sections/card_view';
 
 interface Props {
     navigation: any;
@@ -21,10 +20,7 @@ export class HomePage extends React.Component<Props, State> {
             name: this.props.name,
             navigation: this.props.navigation,
         };
-        this.initialID = Math.floor(Math.random() * Math.floor(300) + 1000);
     }
-    initialID: number;
-    images = 100;
     changeData() {
         this.state = { navigation: ' ', name: '' }
     }
@@ -47,27 +43,10 @@ export class HomePage extends React.Component<Props, State> {
                         </View>
                         {this.renderImages()}
                     </ScrollView>
-                    {this.renderCards(this.initialID)}
+                    <CardView randomImages={true} numberOfImages={50}></CardView>
                 </View>
             </ScrollView>
         );
-    }
-    renderCards(initialID: number) {
-        let cards = [];
-        this.images = this.images + 2;
-        for (let i: any = 0; i < this.images; i++) {
-            cards.push(
-                <View key={'card-parent' + i} style={styles.card}>
-                    <CardHeader key={'card-header' + i}></CardHeader>
-                    <Image
-                        key={i}
-                        style={[styles.cardIcon]}
-                        source={{ uri: `https://picsum.photos/${i + initialID}/500` }}
-                    />
-                    <CardFooter key={'card-footer' + i}></CardFooter>
-                </View>);
-        }
-        return cards;
     }
     renderImages() {
         let images = [];
@@ -78,7 +57,7 @@ export class HomePage extends React.Component<Props, State> {
                     style={styles.statusIconContainer}>
                     <Image
                         key={i}
-                        style={[styles.statusIcon, {backgroundColor: "red"}]}
+                        style={[styles.statusIcon, { backgroundColor: "red" }]}
                         source={{ uri: `https://picsum.photos/${Math.floor(Math.random() * Math.floor(300) + 1000)}/50` }}
                     />
                 </View>);
@@ -99,22 +78,6 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         alignItems: "center",
         paddingBottom: 15,
-    },
-    card: {
-        marginTop: 15,
-        borderRadius: 10,
-        width: "94%",
-        height: 420,
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.18,
-        shadowRadius: 1.00,
-        shadowColor: "black",
-        elevation: 5,
-        backgroundColor: "white",
-        overflow: "hidden",
     },
     statusBar: {
         width: "94%",
@@ -157,9 +120,5 @@ const styles = StyleSheet.create({
         borderRadius: 35,
         alignItems: "center",
         justifyContent: "center",
-    },
-    cardIcon: {
-        width: "100%",
-        height: "100%",
     }
 });
