@@ -1,5 +1,5 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
+import React, { lazy } from 'react';
 import { HomePage } from './views/home';
 import { ProfilePage } from './views/profile';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -18,7 +18,11 @@ export function StackNavigation() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false
+        headerShown: false,
+        transitionSpec: {
+          open: TransitionSpecs.TransitionIOSSpec,
+          close: TransitionSpecs.TransitionIOSSpec,
+        },
       }}
     >
       <Stack.Screen
