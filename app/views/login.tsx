@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableWithoutFeedback, Animated, Easing, ScrollView, TextInput } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableWithoutFeedback, Animated, Easing, ScrollView, TextInput, Image } from 'react-native';
 import { ASSETS } from '../assets/index';
 import { theme } from '../conf';
 interface Props {
@@ -28,7 +28,7 @@ export class LoginPage extends React.Component<Props, State> {
                 style={{
                     backgroundColor: 'white',
                 }}>
-                <View style={[styles.column, {paddingBottom: 20, paddingTop: 20}]}>
+                <View style={[styles.column, { paddingBottom: 20, paddingTop: 50 }]}>
 
                     {/* <TouchableWithoutFeedback onPress={this.login}>
                         <View style={this.state.isClicked ? styles.loginAfterClick : styles.loginBeforeClick}>
@@ -41,6 +41,15 @@ export class LoginPage extends React.Component<Props, State> {
                             }
                         </View>
                     </TouchableWithoutFeedback> */}
+                    <View style={styles.logoContainer}>
+                        <Image style={styles.logo} source={ASSETS.logo}></Image>
+                    </View>
+                    <View style={{ height: 5 }}></View>
+                    <View style={styles.quoteContainer}>
+                        <Text style={styles.quote}>Where your moments reflects</Text>
+                    </View>
+                    <View style={{ height: 50 }}></View>
+
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={styles.searchInput}
@@ -59,22 +68,30 @@ export class LoginPage extends React.Component<Props, State> {
                         // value={this.searchInputValue}
                         />
                     </View>
-                    <View style={{ height: 20 }}></View>
+                    <View style={{ height: 30 }}></View>
                     <View style={styles.buttonsContainer}>
 
-                        <TouchableWithoutFeedback onPress={this.login}>
+                        <TouchableWithoutFeedback onPress={() => { }}>
                             <View style={styles.button}>
-                                <Text>Forgot Password</Text>
+                                <Text style={styles.buttonText}>Forgot Password</Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <View style={{ width: 20 }}></View>
+                        <View style={{ width: 10 }}></View>
 
                         <TouchableWithoutFeedback onPress={this.login}>
                             <View style={styles.button}>
-                                <Text>Login</Text>
+                                {this.state.isClicked ?
+                                    <Animated.Image
+                                        style={[styles.animateIcon, { transform: [{ rotate: this._spin }] }]}
+                                        source={ASSETS.loading_plain}
+                                    /> :
+                                    <Text style={styles.buttonText}>LOGIN</Text>
+                                }
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
+                    <View style={{ height: 15 }}></View>
+                    <Text style={styles.bottomMsg}>Don't have an account? &nbsp;<Text style={styles.signup}> Sign Up Now </Text></Text>
                 </View>
             </ScrollView>
         );
@@ -93,7 +110,9 @@ export class LoginPage extends React.Component<Props, State> {
     login = () => {
         this.spin();
         this.setState({ isClicked: true });
-        setTimeout(() => this.props.navigation.navigate('MainPage'), 100);
+        setTimeout(() => {
+            this.props.navigation.replace('MainPage');
+        }, 1500);
     }
 }
 const styles = StyleSheet.create({
@@ -120,7 +139,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.18,
         shadowRadius: 1.00,
-        shadowColor: "black",
+        shadowColor: theme.primaryColor,
         elevation: 2,
         backgroundColor: "white",
         borderRadius: 10,
@@ -152,8 +171,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     animateIcon: {
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
     },
     buttonsContainer: {
         width: "70%",
@@ -162,9 +181,48 @@ const styles = StyleSheet.create({
         alignItems: "center",
         alignSelf: "center"
     },
+    logoContainer: {
+        flexDirection: "column",
+        flex: 1,
+        height: 200,
+        width: 200,
+        borderRadius: 110,
+        justifyContent: "center",
+        alignItems: "center",
+        borderColor: theme.primaryColor,
+        borderWidth: 5,
+    }
+    , logo: {
+        width: 150,
+        height: 150,
+    }, quoteContainer: {
+
+    },
+    quote: {
+        color: theme.primaryColor,
+        fontSize: 16,
+        fontWeight: "900",
+        fontFamily: "sans-serif-light",
+        // fontStyle: "italic",
+    },
+    buttonText: {
+        color: "white",
+        textAlign: "center",
+    },
     button: {
         height: 50,
-        backgroundColor: "red",
+        backgroundColor: theme.primaryColor,
         flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 25,
+    },
+    bottomMsg: {
+        color: theme.primaryColor,
+    },
+    signup: {
+        color: theme.primaryColor,
+        fontWeight: "bold",
+        textDecorationLine: 'underline',
     }
 });
