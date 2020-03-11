@@ -115,8 +115,6 @@ export class LoginPage extends React.Component<Props, State> {
     }
     login = () => {
         this.spin();
-        console.log(this.state.username);
-        console.log(this.state.password);
         this.setState({ isClicked: true });
         setTimeout(() => {
             if(this.state.username === 'user' && this.state.password === 'password') {
