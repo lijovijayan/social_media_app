@@ -4,4 +4,6 @@ export const ASSETS = {
     loading_blue: require('./images/loading_blue.png'),
     logo: require('./images/logo.png'),
     loading_plain: require('./images/loading_plain1.png'),
+    goole: require('./images/google.png'),
+    facebook: require('./images/facebook.png'),
 }

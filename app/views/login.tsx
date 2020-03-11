@@ -96,7 +96,21 @@ export class LoginPage extends React.Component<Props, State> {
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
-                    <View style={{ height: 15 }}></View>
+                    <View style={{ height: 20 }}></View>
+                    <View style={[styles.loginWith, styles.google]}>
+                        <View style={styles.loginIconContainer}>
+                            <Image source={ASSETS.goole} style={styles.loginWith_icon}></Image>
+                        </View>
+                        <Text style={styles.loginWith_text}>Login With google</Text>
+                    </View>
+                    <View style={{ height: 10 }}></View>
+                    <View style={[styles.loginWith, styles.facebook]}>
+                        <View style={styles.loginIconContainer}>
+                            <Image source={ASSETS.facebook} style={styles.loginWith_icon}></Image>
+                        </View>
+                        <Text style={styles.loginWith_text}>Login With facebook</Text>
+                    </View>
+                    <View style={{ height: 20 }}></View>
                     <Text style={styles.bottomMsg}>Don't have an account? &nbsp;<Text style={styles.signup}> Sign Up Now </Text></Text>
                 </View>
             </ScrollView>
@@ -117,8 +131,8 @@ export class LoginPage extends React.Component<Props, State> {
         this.spin();
         this.setState({ isClicked: true });
         setTimeout(() => {
-            if(this.state.username === 'user' && this.state.password === 'password') {
-                    this.props.navigation.replace('MainPage');
+            if (this.state.username === 'user' && this.state.password === 'password') {
+                this.props.navigation.replace('MainPage');
             } else {
                 this.setState({ isClicked: false });
             }
@@ -234,5 +248,31 @@ const styles = StyleSheet.create({
         color: theme.primaryColor,
         fontWeight: "bold",
         textDecorationLine: 'underline',
+    }, loginWith: {
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1,
+        height: 50,
+        width: "70%",
+        backgroundColor: "red",
+        borderRadius: 25,
+    }, facebook: {
+        backgroundColor: "#3b5998",
+    }, google: {
+        backgroundColor: "#db3236",
+    }, loginWith_text: {
+        color: "white",
+        textAlign: "center",
+    }, loginWith_icon: {
+        width: 30,
+        height: 30,
+    }, loginIconContainer: {
+        position: "absolute",
+        left: 8,
+        borderRadius: 17,
+        height: 34,
+        width: 34,
+        borderColor: "white",
+        borderWidth: 2,
     }
 });
