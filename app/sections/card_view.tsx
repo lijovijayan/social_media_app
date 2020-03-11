@@ -18,6 +18,8 @@ export class CardView extends React.Component<Props> {
         let cards = [];
         this.props.numberOfImages;
         for (let i: any = 0; i < (this.props.numberOfImages ? this.props.numberOfImages : 100); i++) {
+            const url = `https://picsum.photos/${this.props.randomImages ?
+                Math.floor(Math.random() * Math.floor(1000)) : (i + 100)}/500`;
             cards.push(
                 <View key={'card-parent' + i} style={styles.card}>
                     <CardHeader key={'card-header' + i}></CardHeader>
@@ -25,11 +27,10 @@ export class CardView extends React.Component<Props> {
                         key={i}
                         style={[styles.cardIcon]}
                         source={{
-                            uri: `https://picsum.photos/${this.props.randomImages ?
-                                Math.floor(Math.random() * Math.floor(1000)) : (i + 100)}/500`
+                            uri: url
                         }}
                     />
-                    <CardFooter key={'card-footer' + i}></CardFooter>
+                    <CardFooter imageURL={url.toString()} key={'card-footer' + i}></CardFooter>
                 </View>);
         }
         return cards;

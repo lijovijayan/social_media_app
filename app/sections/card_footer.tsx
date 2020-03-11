@@ -1,8 +1,9 @@
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Share } from 'react-native';
 import { theme } from '../conf';
 interface Props {
+    imageURL: string,
 }
 interface State {
     like: boolean,
@@ -32,7 +33,19 @@ export class CardFooter extends React.Component<Props, State> {
                     <MaterialCommunityIcons style={{ color: "white" }} size={25} name={'comment-outline'} />
                 </View>
                 <View style={style.iconContainer}>
-                    <MaterialCommunityIcons style={{ color: "white" }} size={25} name={'share-outline'} />
+                    <MaterialCommunityIcons style={{ color: "white" }}
+                        onPress={() => {
+                            console.log(this.props.imageURL);
+                            Share.share({ message: this.props.imageURL, url: this.props.imageURL },
+                                { dialogTitle: 'post shared from ripples app' }
+                            ).then(({ action }) => {
+                                if (action === Share.sharedAction)
+                                    console.log('Share was successful');
+                                else
+                                    console.log('Share was dismissed');
+                            });
+                        }}
+                        size={25} name={'share-outline'} />
                 </View>
             </View >);
     }
