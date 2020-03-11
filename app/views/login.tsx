@@ -7,12 +7,18 @@ interface Props {
 }
 interface State {
     isClicked: any;
+    username: string,
+    password: string,
 }
 export class LoginPage extends React.Component<Props, State> {
     spinValue: Animated.Value;
     constructor(props: Props) {
         super(props);
-        this.state = { isClicked: false };
+        this.state = {
+            isClicked: false,
+            username: '',
+            password: ''
+        };
         this.spinValue = new Animated.Value(0);
         this._spin = this.spinValue.interpolate({
             inputRange: [0, 1],
@@ -53,7 +59,7 @@ export class LoginPage extends React.Component<Props, State> {
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={styles.searchInput}
-                            onChangeText={text => (text: string) => { console.log(text) }}
+                            onChangeText={(text: string) => { this.setState({ username: text }) }}
                             placeholder='username'
                         // value={this.searchInputValue}
                         />
@@ -63,7 +69,7 @@ export class LoginPage extends React.Component<Props, State> {
                         <TextInput
                             secureTextEntry={true}
                             style={styles.searchInput}
-                            onChangeText={text => (text: string) => { console.log(text) }}
+                            onChangeText={(text: string) => { this.setState({ password: text }) }}
                             placeholder='password'
                         // value={this.searchInputValue}
                         />
@@ -109,9 +115,15 @@ export class LoginPage extends React.Component<Props, State> {
     }
     login = () => {
         this.spin();
+        console.log(this.state.username);
+        console.log(this.state.password);
         this.setState({ isClicked: true });
         setTimeout(() => {
-            this.props.navigation.replace('MainPage');
+            if(this.state.username === 'user' && this.state.password === 'password') {
+                    this.props.navigation.replace('MainPage');
+            } else {
+                this.setState({ isClicked: false });
+            }
         }, 1500);
     }
 }
